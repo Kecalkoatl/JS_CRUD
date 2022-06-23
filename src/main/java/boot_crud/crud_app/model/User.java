@@ -1,6 +1,8 @@
 package boot_crud.crud_app.model;
 
 
+import boot_crud.crud_app.dao.RoleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -37,8 +39,8 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
 
@@ -55,6 +57,7 @@ public class User implements UserDetails {
         this.username = username;
         this.roles = roles;
     }
+
 
     public int getId() {
         return id;
@@ -96,6 +99,26 @@ public class User implements UserDetails {
         Salary = salary;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+        public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+//    public void setRoles(String role) {
+//
+//    }
+
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -112,6 +135,7 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
     }
+
 
     @Override
     public String getPassword() {

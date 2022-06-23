@@ -7,18 +7,22 @@
 <body>
 
 <form th:method = "POST" th:action="@{/admin}" th:object="${user}">
+    <div class = "form-group">
     <label for="name">Enter name: </label>
     <input type="text" th:field = "*{Name}" id="name" >
-    <br/>
+    </div>
+    <div class = "form-group">
     <label for="surname">Enter surname: </label>
     <input type="text" th:field = "*{Surname}" id="surname" >
-    <br/>
+    </div>
+    <div class = "form-group">
     <label for="departament">Enter departament: </label>
     <input type="text" th:field = "*{Departament}" id="departament" >
-    <br/>
+    </div>
+    <div class = "form-group">
     <label for="salary">Enter salary: </label>
     <input type="text" th:field = "*{Salary}" id="salary" >
-    <br/>
+    </div>
     <input type="submit" value="Add user"/>
 
 </form>

@@ -25,13 +25,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public User getUserById(int id) {
-
-        User returnUser = new User();
-        Optional<User> user = userRepository.findById(id);
-        if(user.isPresent()){
-            returnUser = user.get();
-        }
-        return returnUser;
+        return userRepository.findById(id).orElse(new User());
     }
 
     @Override
@@ -47,6 +41,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public void removeUser(int id) {
+        User user = getUserById(id);
+        user.setRoles(null);
+        userRepository.save(user);
         userRepository.deleteById(id);
     }
 
@@ -61,9 +58,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
         User user = findUserByUsername(username);
 
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("Not found");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),user.getAuthorities());
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
     }
 }

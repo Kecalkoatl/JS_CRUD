@@ -1,21 +1,97 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title></title>
 </head>
 <body>
-<div>
-    <form th:action="@{/logout}" form-method="post">
-        <input type="submit" value="Sign Out">
-    </form>
-</div>
-<p th:text="${user.getId()}">user</p>
-<p th:text="${user.getName()}">user</p>
-<p th:text="${user.getSurname()}">user</p>
-<p th:text="${user.getDepartament()}">user</p>
-<p th:text="${user.getSalary()}">user</p>
+<nav class="navbar navbar-dark bg-dark">
+            <span class="navbar-brand mb-0 h1">
+                <a th:text="${user.getUsername()}">
+                user</a>
+                <a> with roles: </a>
+                <a th:each="role : ${user.getAuthorities()}">
+                <a th:text="${role.getRole()}"> role</a>
+                </a>
+            </span>
 
-</form>
+    <form class="form-inline" th:action="@{/logout}" form-method="post">
+        <button class="btn btn-outline-secondary" type="submit">Logout</button>
+    </form>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <br>
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+                   aria-controls="v-pills-home" aria-selected="true">User</a>
+            </div>
+        </div>
+        <div class="col-9 bg-light">
+            <br>
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                     aria-labelledby="v-pills-home-tab">
+                    <h1><strong>User-information page</strong></h1>
+                    <div class="card text">
+                        <div class="card-header">
+                            <h2>About user</h2>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped bg-white">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Surname</th>
+                                    <th scope="col">Departament</th>
+                                    <th scope="col">Salary</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Password</th>
+                                    <th scope="col">Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td th:text="${user.getId()}">user</td>
+                                    <td th:text="${user.getName()}">user</td>
+                                    <td th:text="${user.getSurname()}">user</td>
+                                    <td th:text="${user.getDepartament()}">user</td>
+                                    <td th:text="${user.getSalary()}">user</td>
+                                    <td th:text="${user.getUsername()}">user</td>
+                                    <td th:text="${user.getPassword()}">user</td>
+                                    <td>
+                                        <a th:each="role : ${user.getAuthorities()}">
+                                            <a th:text="${role.getRole()}"> role</a>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>
