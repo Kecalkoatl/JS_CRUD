@@ -9,14 +9,7 @@
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
-            <span class="navbar-brand mb-0 h1">
-                <a th:text="${user.getUsername()}">
-                user</a>
-                <a> with roles: </a>
-                <a th:each="role : ${user.getAuthorities()}">
-                <a th:text="${role.getRole()}"> role</a>
-                </a>
-            </span>
+            <span class="navbar-brand mb-0 h1" id = "userDetail"></span>
 
     <form class="form-inline" th:action="@{/logout}" form-method="post">
         <button class="btn btn-outline-secondary" type="submit">Logout</button>
@@ -57,21 +50,7 @@
                                     <th scope="col">Role</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td th:text="${user.getId()}">user</td>
-                                    <td th:text="${user.getName()}">user</td>
-                                    <td th:text="${user.getSurname()}">user</td>
-                                    <td th:text="${user.getDepartament()}">user</td>
-                                    <td th:text="${user.getSalary()}">user</td>
-                                    <td th:text="${user.getUsername()}">user</td>
-                                    <td th:text="${user.getPassword()}">user</td>
-                                    <td>
-                                        <a th:each="role : ${user.getAuthorities()}">
-                                            <a th:text="${role.getRole()}"> role</a>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <tbody id = "userTable">
                                 </tbody>
                             </table>
                         </div>
@@ -83,7 +62,7 @@
     </div>
 </div>
 
-
+<script src="userDetails.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
